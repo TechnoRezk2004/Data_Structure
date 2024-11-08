@@ -1,0 +1,108 @@
+#include <iostream>
+using namespace std;
+struct Node {
+	int data;
+	Node* next;
+};
+class linked
+{
+public :
+	Node* head;
+	linked()
+	{
+		
+		head = NULL;
+
+	}
+	bool isempt()
+	{
+		if (head == NULL) return true;
+		else return false;
+	}
+
+	void insert(int x)
+	{
+		if (isempt())
+		{
+			Node* newnode = new Node();
+			newnode->data = x;
+			newnode->next = NULL;
+			head = newnode;
+		}
+		else {
+			Node* newnode = new Node();
+			newnode->data = x;
+			newnode->next = head;
+			head = newnode;
+		}
+	}
+	void print()
+	{
+		Node* temp =head;
+		while (temp != NULL)
+		{
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+		cout << "\n";
+	}
+	void count()
+	{int count = 0;
+		Node* re = head;
+		while (re != NULL)
+		{
+			
+			count++;
+			re = re->next;
+		}
+		cout << "num of element is : " << count<<endl;
+	}
+	void search(int s)
+	{
+		int f = 0;
+		Node* temp = head;
+		while (temp != NULL)
+		{
+			if (temp->data == s)
+			{
+				cout << "num is exist:) \n"; f = 1;
+				break;
+			}
+			temp = temp->next;
+		}
+
+		if (f==0) cout << "num not exist:(";
+	}
+};
+int main() {
+	linked ob;
+	int ch, nval,val;
+	while (true)
+	{
+		cout << " \n 1- Add \n 2- display \n 3-count \n";
+		cin >> ch;
+		switch (ch)
+		{case 1:
+			cout << "enter num of value :";
+			cin >> nval;
+			 
+			for (int i = 0; i < nval; i++)
+			{
+				cin >> val;
+				ob.insert(val);
+			}
+		    break;
+		case 2:
+			ob.print();
+			break;
+		case 3:
+			ob.count();
+			break;
+		default:
+			cout << "invalid choose:(";
+
+
+		}
+	}
+	
+}
