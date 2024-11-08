@@ -1,0 +1,68 @@
+/*
+//factorial with loop
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout<<"enter num";
+    cin>>n;
+    int res =1;
+    for(int i=2 ; i<=n;i++)
+    {
+        res*=i;
+    }
+    cout<<"fact is : "<<res;
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+*/
+//factorial recursion
+#include <iostream>
+using namespace std;
+double fact (double n);
+int main()
+{
+    int n;
+    cout<<"enter num: ";
+    cin>>n;
+    double facto;
+    facto = fact(n);
+    cout <<"fact. is: "<<facto;
+}
+double fact (double n)
+{
+    if (n==1)
+    {
+        return 1;
+    }
+
+    else
+    {
+        return n*fact(n-1);
+
+    }
+}
+/*
+-------------------------------------------------------------------------------------------------------------------------
+
+//fippo loop
+#include <iostream>
+using namespace std;
+double fact (double n);
+int main()
+{
+    int n;
+    cout<<"enter n: ";
+    cin>>n;
+    int x=0 , y=1 , z=0;
+    for (int i=0 ; i<n;i++)
+    {
+        cout<<x<<" ";
+        z=x+y;
+        x=y;
+        y=z;
+
+    }
+}
+*/
