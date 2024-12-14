@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 using namespace std;
 
 
@@ -120,6 +121,8 @@ void Max(int arr[], int size)
 
 }
 };
+//ok
+
 class MyArrays2D {
 public:
     void input(int arr[][100], int rows, int cols) {
@@ -140,6 +143,9 @@ public:
         }
     }
 };
+//doesnt work,why?? I don't know
+
+
 struct Node {
     int data;
     Node* next;
@@ -249,15 +255,105 @@ public:
             }
         }
     }
+}; 
+//ok
+
+#define SIZE 5
+class Stackyy {
+public:
+	int stacky[SIZE];
+	int top = -1;
+
+stack <int > mystack;
+//فنكشن لطياعة عناصر الاستاك بلت ان عشان مفيهاش طباعة
+void print_stackelement() {
+	while (!mystack.empty())
+	{
+		
+			cout <<mystack.top()<<endl;
+			mystack.pop();
+		
+	}
+	
+}
+//////////////////// my functions ///////////
+void rpush(int value)
+{
+
+	if (top >= SIZE - 1)
+	{
+		cout << "stack overflow \n";
+	}
+	else {
+
+		stacky[++top] = value;
+	}
+}
+int rpop() {
+
+	if (top == -1)
+	{
+		cout << "stack underflow \n";
+	}
+	else
+	{
+		return stacky[top--];
+	}
+}
+int rpeek() {
+
+	if (top == -1)
+	{
+		cout << "stack underflow \n";
+	}
+	else
+	{
+		return stacky[top];
+	}
+}
+void rdisplay()
+{
+
+	if (top == -1)
+	{
+		cout << "stack underflow \n";
+	}
+	else {
+		for (int i = top; i >= 0; i--)
+		{
+			cout << stacky[i] << endl;
+		}
+	}
+
+}
+bool isempty()
+{
+	if (top == -1) return 1;
+	else return 0;
+}
+bool isfull()
+{
+	if (top = (SIZE - 1)) return 1;
+	else return 0;
+}
+
+
 };
+//satck by list
+
+
+
 int main()
 {
+  
     MyArrays1D o;
     MyArrays2D z;
     Linked R;
+    Stackyy re;
      int x;
+    
      int choose;
-     cout << "1-assigment 1 \n 2-assigment 2 \n 3-assigment 3 ";
+     cout << "1-arrays\n 2-recursion\n 3-linked list\n 4-stack  ";
      cin >> choose;
      if (choose == 1)
      {
@@ -288,12 +384,12 @@ int main()
          else
              cout << "invalid choose:( ";
      }
-    //22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+    //recursion
      else if (choose == 2) {//recursion
      
 
      }
-     //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+     //linked
      else if (choose == 3) { //linked list
           while (1){
          int cho;
@@ -344,7 +440,92 @@ int main()
 
            } 
 
+
+
+     
      }
+     //stack
+     
+     else if (choose == 4) {
+
+         int ch, t;
+         int ch1;
+         int ch2;
+         while (true) {
+         cout << "press1 --> technoFunction ::: press 2 --> bultin stack ";
+         cin >> ch;
+
+         switch (ch)
+         {
+         case 1:
+             /////////////////////////////////
+             cout << "1-push . 2-pop . 3- top . 4-print";
+             cin >> ch1;
+             switch (ch1)
+             {
+             case 1:
+                 int n;
+                 int v;
+                 cout << "enter the num of element";
+                 cin >> n;
+                 for (int i = 0; i < n; i++) {
+
+                     cin >> v;
+                     re.rpush(v);
+                 }
+                 break;
+             case 2:
+                 cout << "pop: " << re.rpop() << endl;
+             case 3:
+                 cout << re.rpeek();
+             case 4:
+                 re.rdisplay();
+             default:
+                 cout << "error 404";
+                 break;
+             }
+
+             break;
+         case 2:
+             cout << "1-push . 2-pop . 3- top . 4-print";
+             cin >> ch2;
+             switch (ch2)
+             {
+             case 1:
+                 int n;
+                 int v;
+                 cout << "enter the num of element";
+                 cin >> n;
+                 for (int i = 0; i < n; i++) {
+
+                     cin >> v;
+                     re.mystack.push(v);
+                 }
+                 break;
+             case 2:
+                 re.mystack.pop();
+             case 3:
+                 cout << re.mystack.top();
+             case 4:
+                 re.print_stackelement();
+             default:
+                 cout << "error 404";
+                 break;
+             }
+
+             break;
+
+         default:
+             cout << "invalid choose *- press 1 or 2 ONLY";
+         }
+
+
+
+     }
+       
+     
+     }
+    
      else 
          cout << "invalid choose:( ";
 
@@ -353,4 +534,4 @@ int main()
    
 
     
-}            
+}
