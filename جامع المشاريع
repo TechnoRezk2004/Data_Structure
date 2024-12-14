@@ -1,0 +1,356 @@
+#include <iostream>
+using namespace std;
+
+
+
+
+class MyArrays1D {
+public:
+
+void Display(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
+}
+
+void ReadArray(int arr[], int size)
+{
+    cout << "Enter "<<size << " elements: ";
+    cout << "\n";
+    for (size_t i = 0; i < size; i++)
+    {
+        cout << "Enter element number" << i + 1 << " : ";
+        cin >> arr[i];
+    }
+}
+
+void CalcSum(int arr[], int size)
+{
+    int sum = 0;
+    for (int i = 0; i < size; i++)
+    {
+        sum = sum + arr[i];
+    }
+    cout << "The sum = " << sum << endl;
+    cout << "-------------------------------------------\n";
+
+}
+
+void CalAverage(int arr[], int size)
+{
+    int sum = 0;
+    for (int i = 0; i < size; i++)
+    {
+        sum = sum + arr[i];
+    }
+    cout << "The Average = " << (float)sum / size << endl;
+    cout << "-------------------------------------------\n";
+
+}
+
+void SortAscending(int arr[], int size)
+{
+
+    int temp = 0;
+    for (int j = 0; j < size; j++)
+        for (int i = 0; i < size - 1; i++)// 3 8 0 7 >> 8 3 0 7 > 
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                temp = arr[i];  // temp=8
+                arr[i] = arr[i + 1]; // arr[1]=0 >> 3 0 0 7
+                arr[i + 1] = temp; // arr[2]=8 >>   3 0 8 7
+            }
+        }
+    cout << "array after Acending: ";
+
+  Display(arr, size);
+  cout << "-------------------------------------------\n";
+
+}
+void SortDeAscending(int arr[], int size)
+{
+
+    int temp = 0;
+    for (int j = 0; j < size; j++)
+        for (int i = 0; i < size - 1; i++)// 3 8 0 7 >> 8 3 0 7 > 
+        {
+            if (arr[i] < arr[i + 1])
+            {
+                temp = arr[i];  // temp=8
+                arr[i] = arr[i + 1]; // arr[1]=0 >> 3 0 0 7
+                arr[i + 1] = temp; // arr[2]=8 >>   3 0 8 7
+            }
+        }
+    cout << "array after deAcending: ";
+
+    Display(arr, size);
+    cout << "-------------------------------------------\n";
+
+}
+
+void Min(int arr[], int size)
+{
+    int min = INT_MAX; //0
+    for (int i = 0; i < size; i++)
+    {
+        if (min > arr[i])
+        {
+            min = arr[i];
+        }
+    }
+    cout << "min value of arry = " << min << endl;
+    cout << "-------------------------------------------\n";
+}
+void Max(int arr[], int size)
+{
+    int max = INT_MIN;
+    for (int i = 0; i < size; i++)
+    {
+        if (max < arr[i]) //max 3  >>-1
+        {
+            max = arr[i];
+        }
+    }
+    cout << "max value of arry = " << max << endl;
+    cout << "-------------------------------------------\n";
+
+}
+};
+class MyArrays2D {
+public:
+    void input(int arr[][100], int rows, int cols) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                cout << "arr[" << i << "][" << j << "]: ";
+                cin >> arr[i][j];
+            }
+        }
+    }
+
+    void output(int arr[][100], int rows, int cols) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                cout << arr[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+struct Node {
+    int data;
+    Node* next;
+};
+class Linked
+{
+public:
+    Node* head;
+    Linked()
+    {
+
+        head = NULL;
+
+    }
+    bool isempt()
+    {
+        if (head == NULL) return true;
+        else return false;
+    }
+
+    void insert(int x)
+    {
+        if (isempt())
+        {
+            Node* newnode = new Node();
+            newnode->data = x;
+            newnode->next = NULL;
+            head = newnode;
+        }
+        else {
+            Node* newnode = new Node();
+            newnode->data = x;
+            newnode->next = head;
+            head = newnode;
+        }
+    }
+    void print()
+    {
+        Node* temp = head;
+        while (temp != NULL)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << "\n";
+    }
+    int count()
+    {
+        int c = 0;
+        Node* re = head;
+        while (re != NULL)
+        {
+
+            c++;
+            re = re->next;
+        }
+        return c;
+    }
+    bool search(int vall)
+    {
+        int f = 0;
+        Node* temp = head;
+        while (temp != nullptr)
+        {
+            if (temp->data == vall)
+            {
+                return 1;
+                f = 1;
+                break;
+            }
+            temp = temp->next;
+        }
+        if (f == 0) return 0;
+    }
+
+    void delete_o(int val)
+    {
+        if (isempt())
+        {
+            cout << "its empty_y\n";
+        }
+        else {
+            if (search(val)) {
+                Node* temp = head;
+                if (temp->data == val)
+                {
+                    head = temp->next;
+                    delete temp;
+                }
+                else {
+                    while (temp->next != NULL)
+                    {
+                        if (temp->next->data == val)
+                        {
+                            Node* r = temp->next;
+                            temp->next = temp->next->next;
+                            delete r;
+                        }
+                        else
+                            temp = temp->next;
+                    }
+                }
+            }
+            else
+            {
+                cout << "the element is not exist:(";
+            }
+        }
+    }
+};
+int main()
+{
+    MyArrays1D o;
+    MyArrays2D z;
+    Linked R;
+     int x;
+     int choose;
+     cout << "1-assigment 1 \n 2-assigment 2 \n 3-assigment 3 ";
+     cin >> choose;
+     if (choose == 1)
+     {
+         int c;
+         cout << "1-1d array \n 2-2d array \n 3-2d array sum & product: ";
+         cin >> c;
+         if (c == 1) {
+             cout << "select element of array: ";
+             cin >> x;
+             int* arr = new int[x];
+             o.ReadArray(arr, x);
+             o.CalcSum(arr, x);
+             o.Max(arr, x);
+             o.SortAscending(arr, x);
+             o.SortDeAscending(arr, x);
+             o.Min(arr, x);
+             o.CalAverage(arr, x);
+         }
+         else if (c == 2) {
+           /*  int d1, d2;
+             cout << "enter num of R & C of array";
+             cin >> d1 >> d2;
+             
+             int * arr2 =  new  int[d1,d2];*/
+
+         }
+         else if (c == 3) {}
+         else
+             cout << "invalid choose:( ";
+     }
+    //22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+     else if (choose == 2) {//recursion
+     
+
+     }
+     //3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+     else if (choose == 3) { //linked list
+          while (1){
+         int cho;
+         cout << "1-insert , 2- count , 3- search , 4-delete 5- show my list : ";
+         cin >> cho;
+         
+         if (cho == 1) {
+             int num, va;
+             cout << "enter num of values: ";
+             cin >> num;
+             for (int i = 0; i < num; i++) {
+                 cin >> va;
+                 R.insert(va);
+             }
+             R.print();
+         }
+         else if (cho == 2)
+         {
+             cout << "num of elements: " << R.count();
+         }
+         else if (cho == 3)
+         {
+             int b;
+             cout << "enter the num you want to search";
+             cin >> b;
+             if (R.search(b)) cout << b << " is exist";
+             else cout << "not exist";
+         }
+         else if (cho == 4) {
+             int num, va;
+             cout << "enter num of values: ";
+             cin >> num;
+             for (int i = 0; i < num; i++) {
+                 cin >> va;
+                 R.delete_o(va);
+             }
+             R.print();
+         }
+         else if (cho == 5) {
+             if (R.count() == 0)
+                 cout << "list is empty \n";
+             else  R.print();
+         }
+         else cout << "invalid choose:(";
+
+
+            
+
+           } 
+
+     }
+     else 
+         cout << "invalid choose:( ";
+
+  
+   
+   
+
+    
+}            
