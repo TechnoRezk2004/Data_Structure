@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 using namespace std;
 
 
@@ -265,7 +266,7 @@ public:
 	int top = -1;
 
 stack <int > mystack;
-//فنكشن لطياعة عناصر الاستاك بلت ان عشان مفيهاش طباعة
+//????? ?????? ????? ??????? ??? ?? ???? ?????? ?????
 void print_stackelement() {
     if (mystack.empty()) cout << "empty:( \n";
 	while (!mystack.empty())
@@ -411,245 +412,329 @@ public:
 };
 //satck by list
 
-
-
-int main()
+class Recursion
 {
 
+};
+class MyQueue {
+public:
+    //-Q by bultIn 
+    queue <int> MQ;
+    void print_Qelementbn() {
+        if (MQ.empty()) 
+            cout << "empty:( \n";
+        
+        while (!MQ.empty())
+        {
+
+            cout << MQ.front() << endl;
+           MQ.pop();
+
+        }
+
+    }
+
+
+    void inqueubn() {
+        int n;
+        int v;
+        cout << "enter_the_num_of_element: ";
+        cin >> n;
+        for (int i = 0; i < n; i++) {
+            cin >> v;
+            MQ.push(v);
+
+        }
+    }
+    void dequeuebn (){
+        if (MQ.empty()) cout << "cant dequeue :( Q is empty";
+        else
+            MQ.pop();
+    }
+
+    void showfrontbn (){
+        if (MQ.empty()) cout << "cant show HEAD :( Q is empty";
+        else
+            cout << "front is: " << MQ.front();
+    }
+
+        //-Q by Array
+       
+        // 
+        //-Q by linkedlist 
 
 
 
+    };
 
 
-    MyArrays1D o;
-    MyArrays2D z;
-    Linked R;
-    Stackyy re;
-    stackByLinkedList O;
-    int x;
 
-    int choose;
-    cout << "1-arrays\n 2-recursion\n 3-linked list\n 4-stack  ";
-    cin >> choose;
-    if (choose == 1)
+    int main()
     {
-        int c;
-        cout << "1-1d array \n 2-2d array \n 3-2d array sum & product: ";
-        cin >> c;
-        if (c == 1) {
-            cout << "select element of array: ";
-            cin >> x;
-            int* arr = new int[x];
-            o.ReadArray(arr, x);
-            o.CalcSum(arr, x);
-            o.Max(arr, x);
-            o.SortAscending(arr, x);
-            o.SortDeAscending(arr, x);
-            o.Min(arr, x);
-            o.CalAverage(arr, x);
-        }
-        else if (c == 2) {
-            /*  int d1, d2;
-              cout << "enter num of R & C of array";
-              cin >> d1 >> d2;
 
-              int * arr2 =  new  int[d1,d2];*/
+
+
+
+
+
+        MyArrays1D o;
+        MyArrays2D z;
+        Linked R;
+        Stackyy re;
+        stackByLinkedList O;
+        int x;
+
+        int choose;
+        cout << "\n1-arrays\n 2-recursion\n 3-linked list\n 4-stack\n Queue:  ";
+        cin >> choose;
+        if (choose == 1)
+        {
+            int c;
+            cout << "1-1d array \n 2-2d array \n 3-2d array sum & product: ";
+            cin >> c;
+            if (c == 1) {
+                cout << "select element of array: ";
+                cin >> x;
+                int* arr = new int[x];
+                o.ReadArray(arr, x);
+                o.CalcSum(arr, x);
+                o.Max(arr, x);
+                o.SortAscending(arr, x);
+                o.SortDeAscending(arr, x);
+                o.Min(arr, x);
+                o.CalAverage(arr, x);
+            }
+            else if (c == 2) {
+                /* int d1, d2;
+                 cout << "enter num of R & C of array";
+                 cin >> d1 >> d2;
+
+                   int** arr2 = new int*[d1];
+                      for (int i = 0; i < d1; i++) {
+                       arr2[i] = new int[d2];
+                   }       */
+
+            }
+            else if (c == 3) {}
+            else
+                cout << "invalid choose:( ";
+        }
+        //recursion
+        else if (choose == 2) {//recursion
+
 
         }
-        else if (c == 3) {}
+        //linked
+        else if (choose == 3) { //linked list
+            while (1) {
+                int cho;
+                cout << "1-insert , 2- count , 3- search , 4-delete 5- show my list : ";
+                cin >> cho;
+
+                if (cho == 1) {
+                    int num, va;
+                    cout << "enter num of values: ";
+                    cin >> num;
+                    for (int i = 0; i < num; i++) {
+                        cin >> va;
+                        R.insert(va);
+                    }
+                    R.print();
+                }
+                else if (cho == 2)
+                {
+                    cout << "num of elements: " << R.count();
+                }
+                else if (cho == 3)
+                {
+                    int b;
+                    cout << "enter the num you want to search";
+                    cin >> b;
+                    if (R.search(b)) cout << b << " is exist";
+                    else cout << "not exist";
+                }
+                else if (cho == 4) {
+                    int num, va;
+                    cout << "enter num of values: ";
+                    cin >> num;
+                    for (int i = 0; i < num; i++) {
+                        cin >> va;
+                        R.delete_o(va);
+                    }
+                    R.print();
+                }
+                else if (cho == 5) {
+                    if (R.count() == 0)
+                        cout << "list is empty \n";
+                    else  R.print();
+                }
+                else cout << "invalid choose:(";
+
+
+
+
+            }
+
+
+
+
+        }
+        //stack
+
+        else if (choose == 4) {
+
+            int ch, t;
+            int ch1;
+            int ch2;
+            while (true) {
+                cout << "press1 --> technoFunction ::: press 2 --> bultin stack :: 3-stack by linked list:) ";
+                cin >> ch;
+
+
+                if (ch == 1) {
+                    /////////////////////////////////
+                    cout << "1-push . 2-pop . 3- top . 4-print";
+                    cin >> ch1;
+
+                    if (ch1 == 1) {
+                        int n;
+                        int v;
+                        cout << "enter the num of element";
+                        cin >> n;
+                        for (int i = 0; i < n; i++) {
+
+                            cin >> v;
+                            re.rpush(v);
+                        }
+
+                    }
+                    else if (ch1 == 2)
+                        cout << "pop: " << re.rpop() << endl;
+                    else if (ch1 == 3)
+                        cout << re.rpeek();
+                    else if (ch1 == 4)
+                        re.rdisplay();
+                    else
+                        cout << "error 404";
+                }
+
+
+                else if (ch == 2) {
+
+
+                    cout << "1-push . 2-pop . 3- top . 4-print";
+                    cin >> ch2;
+                    if (ch2 == 1) {
+
+                        int n;
+                        int v;
+                        cout << "enter the num of element";
+                        cin >> n;
+                        for (int i = 0; i < n; i++) {
+
+                            cin >> v;
+                            re.mystack.push(v);
+                        }
+                    }
+
+                    else if (ch2 == 2) {
+                        if (re.mystack.size() == 0) cout << "cant pop:( \n";
+                        else re.mystack.pop();
+                    }
+                    else if (ch2 == 3)
+                    {
+                        if (re.mystack.size() == 0) cout << "stack empty:( \n";
+
+                        else cout << re.mystack.top();
+                    }
+                    else if (ch2 == 4)
+
+                        re.print_stackelement();
+                    else
+                        cout << "error 404";
+                }
+
+                else if (ch == 3) {
+
+
+                    int ch3;
+                    cout << "1-push . 2-pop . 3- top . 4-print";
+                    cin >> ch3;
+
+                    if (ch3 == 1) {
+
+
+
+                        int n;
+                        int v;
+                        cout << "enter the num of element";
+                        cin >> n;
+                        for (int i = 0; i < n; i++) {
+
+                            cin >> v;
+                            O.pushL(v);
+
+                        }
+                    }
+
+                    else if (ch3 == 2) {
+                        O.popL();
+                        cout << "";
+                    }
+                    else if (ch3 == 3) {
+                        O.peekL();
+                        cout << "";
+                    }
+                    else if (ch3 == 4) {
+                        cout << "";
+                        O.displayL();
+                        cout << "";
+                    }
+                }
+
+
+                else
+                    cout << "invalid choose *- press 1 or 2 ONLY";
+
+
+
+
+            }
+
+
+        }
+        //Q
+        else if (choose == 5) {
+            int cho;
+            MyQueue Q;
+            while (true) {
+                cout << "1-bult in Q , 2- Q By Array 3-Q by Linked List: ";
+                cin >> cho;
+                if (cho == 1) {
+                    int l;
+                    cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD";
+                    cin >> l;
+                    if (l == 1) {
+                        Q.inqueubn();
+                    }
+                    else if (l == 2) {
+                        Q.dequeuebn();
+                    }
+                    else if (l == 3) {
+                            Q.print_Qelementbn();
+                    }
+                    else if (l == 4) {
+                        Q.showfrontbn();
+                    }
+                    else cout << "invalid choose:(";
+                }
+                /* else if (cho == 2) {}
+                 else if (cho == 3) {}*/
+                else cout << "invalid choose";
+            }
+        }
+
         else
             cout << "invalid choose:( ";
-    }
-    //recursion
-    else if (choose == 2) {//recursion
-
-
-    }
-    //linked
-    else if (choose == 3) { //linked list
-        while (1) {
-            int cho;
-            cout << "1-insert , 2- count , 3- search , 4-delete 5- show my list : ";
-            cin >> cho;
-
-            if (cho == 1) {
-                int num, va;
-                cout << "enter num of values: ";
-                cin >> num;
-                for (int i = 0; i < num; i++) {
-                    cin >> va;
-                    R.insert(va);
-                }
-                R.print();
-            }
-            else if (cho == 2)
-            {
-                cout << "num of elements: " << R.count();
-            }
-            else if (cho == 3)
-            {
-                int b;
-                cout << "enter the num you want to search";
-                cin >> b;
-                if (R.search(b)) cout << b << " is exist";
-                else cout << "not exist";
-            }
-            else if (cho == 4) {
-                int num, va;
-                cout << "enter num of values: ";
-                cin >> num;
-                for (int i = 0; i < num; i++) {
-                    cin >> va;
-                    R.delete_o(va);
-                }
-                R.print();
-            }
-            else if (cho == 5) {
-                if (R.count() == 0)
-                    cout << "list is empty \n";
-                else  R.print();
-            }
-            else cout << "invalid choose:(";
-
-
-
-
-        }
-
-
-
-
-    }
-    //stack
-
-    else if (choose == 4) {
-
-        int ch, t;
-        int ch1;
-        int ch2;
-        while (true) {
-            cout << "press1 --> technoFunction ::: press 2 --> bultin stack :: 3-stack by linked list:) ";
-            cin >> ch;
-
-
-            if (ch == 1) {
-                /////////////////////////////////
-                cout << "1-push . 2-pop . 3- top . 4-print";
-                cin >> ch1;
-
-                if (ch1 == 1) {
-                    int n;
-                    int v;
-                    cout << "enter the num of element";
-                    cin >> n;
-                    for (int i = 0; i < n; i++) {
-
-                        cin >> v;
-                        re.rpush(v);
-                    }
-                    
-                }
-                else if (ch1 == 2)
-                    cout << "pop: " << re.rpop() << endl;
-                else if (ch1 == 3)
-                    cout << re.rpeek();
-                else if (ch1 == 4)
-                    re.rdisplay();
-                else
-                    cout << "error 404";
-            }
-
-
-            else if (ch == 2) {
-
-
-                cout << "1-push . 2-pop . 3- top . 4-print";
-                cin >> ch2;
-                if (ch2 == 1) {
-
-                    int n;
-                    int v;
-                    cout << "enter the num of element";
-                    cin >> n;
-                    for (int i = 0; i < n; i++) {
-
-                        cin >> v;
-                        re.mystack.push(v);
-                    }
-                }
-
-                else if (ch2 == 2) {
-                    if (re.mystack.size()==0) cout << "cant pop:( \n";
-                    else re.mystack.pop();
-                }
-                else if (ch2 == 3)
-                {
-                    if (re.mystack.size() == 0) cout << "stack empty:( \n";
-
-                    else cout << re.mystack.top();
-                }
-                else if (ch2 == 4)
-
-                    re.print_stackelement();
-                else
-                    cout << "error 404";
-            }
-
-            else if (ch == 3) {
-              
-
-                int ch3;
-                cout << "1-push . 2-pop . 3- top . 4-print";
-                cin >> ch3;
-
-                if (ch3 == 1) {
-
-
-
-                    int n;
-                    int v;
-                    cout << "enter the num of element";
-                    cin >> n;
-                    for (int i = 0; i < n; i++) {
-
-                        cin >> v;
-                        O.pushL(v);
-
-                    }
-                }
-
-                else if (ch3 == 2) {
-                    O.popL();
-                    cout << "";
-                }
-                else if (ch3 == 3) {
-                    O.peekL();
-                    cout << "";
-                }
-                else if (ch3 == 4) {
-                    cout << "";
-                    O.displayL();
-                    cout << "";
-                }
-            }
-
-
-            else
-                cout << "invalid choose *- press 1 or 2 ONLY";
-
-
-
-
-        }
-
-
-    }
-
-    else
-        cout << "invalid choose:( ";
-}
-
-
-   
-
     
+    }
