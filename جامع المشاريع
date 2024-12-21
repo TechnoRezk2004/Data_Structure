@@ -8,15 +8,13 @@ using namespace std;
 
 class MyArrays1D {
 public:
-
-void Display(int arr[], int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        cout << arr[i] << " ";
+    
+    void Display(int arr[], int size) {
+        for (int i = 0; i < size; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << "\n";
     }
-    cout << "\n";
-}
 
 void ReadArray(int arr[], int size)
 {
@@ -67,10 +65,10 @@ void SortAscending(int arr[], int size)
                 arr[i + 1] = temp; // arr[2]=8 >>   3 0 8 7
             }
         }
-    cout << "array after Acending: ";
+   /* cout << "array after Acending: ";
 
-  Display(arr, size);
-  cout << "-------------------------------------------\n";
+  
+  cout << "-------------------------------------------\n";*/
 
 }
 void SortDeAscending(int arr[], int size)
@@ -87,10 +85,10 @@ void SortDeAscending(int arr[], int size)
                 arr[i + 1] = temp; // arr[2]=8 >>   3 0 8 7
             }
         }
-    cout << "array after deAcending: ";
+  /*  cout << "array after deAcending: ";
 
-    Display(arr, size);
-    cout << "-------------------------------------------\n";
+   
+    cout << "-------------------------------------------\n";*/
 
 }
 
@@ -119,6 +117,193 @@ void Max(int arr[], int size)
     }
     cout << "max value of arry = " << max << endl;
     cout << "-------------------------------------------\n";
+
+}
+
+//2d 
+void inputArray(int** array, int rows, int cols) {
+    cout << "Enter elements of the array:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> array[i][j];
+        }
+    }
+}
+
+// Function to calculate the sum of all elements
+int calculateSum(int** array, int rows, int cols) {
+    int sum = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            sum += array[i][j];
+        }
+    }
+    return sum;
+}
+
+// Function to calculate the average of all elements
+double calculateAverage(int** array, int rows, int cols) {
+    int sum = calculateSum(array, rows, cols);
+    return static_cast<double>(sum) / (rows * cols);
+}
+void sort(int** array, int rows, int cols)
+{
+    int* arr = new int[rows * cols];
+    int v = 0;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            arr[v++] = array[i][j];
+        }
+    }
+    SortAscending(arr, v);
+    Display(arr, v);
+  /*  for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            array[i][j]= arr[v++];
+        }
+    }*/
+    //printArray( array,rows, cols);
+
+
+}
+void sorthhh(int** array, int rows, int cols)
+{
+    int* arr = new int[rows * cols];
+    int v = 0;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            arr[v++] = array[i][j];
+        }
+    }
+    SortDeAscending(arr, v);
+    Display(arr, v);
+    /*  for (int i = 0; i < rows; i++)
+      {
+          for (int j = 0; j < cols; j++)
+          {
+              array[i][j]= arr[v++];
+          }
+      }*/
+      //printArray( array,rows, cols);
+
+
+}
+
+
+// Function to find the maximum value
+int findMax(int** array, int rows, int cols) {
+    int maxVal = array[0][0];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (array[i][j] > maxVal) {
+                maxVal = array[i][j];
+            }
+        }
+    }
+    return maxVal;
+}
+
+// Function to find the minimum value
+int findMin(int** array, int rows, int cols) {
+    int minVal = array[0][0];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (array[i][j] < minVal) {
+                minVal = array[i][j];
+            }
+        }
+    }
+    return minVal;
+}
+
+// Function to print the array
+void printArray(int** array, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << array[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+//2d sum and multy:(
+void inputArray1(int** array, int rows, int cols) {
+    cout << "Enter elements of the array:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> array[i][j];
+        }
+    }
+}
+
+void inputArray2(int** array2, int rows2, int cols2) {
+    cout << "Enter elements of the array:" << endl;
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+            cin >> array2[i][j];
+        }
+    }
+}
+void sum2darray(int** array, int rows, int cols, int** array2, int rows2, int cols2)
+{
+     inputArray1( array,  rows,  cols);
+     inputArray2( array2,  rows2,  cols2);
+    int** arr3 = new int* [rows];
+    for (int i = 0; i < rows; i++)
+    {
+        arr3[i] = new int[cols];
+    }
+
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+            arr3[i][j] = array[i][j] + array2[i][j];
+        }
+    } 
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+           cout<< arr3[i][j] <<" ";
+        }
+        cout << "\n";
+    }
+
+    
+
+}
+void prod2darray(int** array, int rows, int cols, int** array2, int rows2, int cols2)
+{
+    inputArray1(array, rows, cols);
+    inputArray2(array2, rows2, cols2);
+    int** arr3 = new int* [rows];
+    for (int i = 0; i < rows; i++)
+    {
+        arr3[i] = new int[cols2];
+    }
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols2; j++) {
+            int result = 0;
+            for (int k = 0; k < rows2; k++)
+            {
+                result += array[i][k] * array2[k][j];
+            }
+            arr3[i][j] = result;
+
+            
+        }
+    }
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+            cout << arr3[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+
 
 }
 };
@@ -421,14 +606,15 @@ public:
     //-Q by bultIn 
     queue <int> MQ;
     void print_Qelementbn() {
-        if (MQ.empty()) 
+        queue <int> temp = MQ;
+        if (temp.empty())
             cout << "empty:( \n";
         
-        while (!MQ.empty())
+        while (!temp.empty())
         {
 
-            cout << MQ.front() << endl;
-           MQ.pop();
+            cout << temp.front() << endl;
+            temp.pop();
 
         }
 
@@ -458,16 +644,109 @@ public:
             cout << "front is: " << MQ.front();
     }
 
-        //-Q by Array
+        
        
         // 
-        //-Q by linkedlist 
+       
 
 
 
     };
+//-Q by Array
+
+ //-Q by linkedlist 
+struct Onsor {
+    int data;
+    Onsor* next;
+};
+class QList {
+
+    //push (insert last)
+    //pop (delete first)
+    //top 
+    //display
+ public:
+    Onsor* top;
+    QList()
+    {
+
+        top = NULL;
+
+    }
+    bool sEmpty()
+    {
+        if (top == NULL) return true;
+        else return false;
+    }
+    void insert(int x)
+    {
+        if (sEmpty())
+        {
+            Onsor* newnode = new Onsor();
+            newnode->data = x;
+            newnode->next = NULL;
+            top = newnode;
+        }
+        else {
+            Onsor* newnode = new Onsor();
+            newnode->data = x;
+            newnode->next = top;
+            top = newnode;
+        }
+    }
+    void spushL(int x) {
+
+        if (sEmpty())
+        {
+            insert(x);
 
 
+        }
+        else {
+            Onsor* temp = top;
+            while (temp->next != 0)
+            {
+                temp = temp->next;
+            }
+            Onsor* newnode = new Onsor();
+            newnode->data = x;
+            newnode->next = temp->next;
+            temp->next = newnode;
+        }
+    }
+    void speekL()
+    {
+        if (sEmpty()) cout << "stack under flow:(\n";
+        else {
+            Onsor* temp = top;
+
+            cout << "top is: " << temp->data << "\n";
+        }
+    }
+
+    void sdisplayL()
+    {
+        if (sEmpty())  cout << "stack under flow:(\n";
+        Onsor* temp = top;
+        while (temp != NULL)
+        {
+            cout << temp->data << "\n";
+            temp = temp->next;
+        }
+        cout << "\n";
+    }
+    void spopL() {
+        int v;
+        if (top == NULL) cout << "stack under flow:(\n";
+        else {
+            Onsor* temp = top;
+            top = temp->next;
+            v = temp->data;
+            delete temp;
+            cout << "deleteed is : " << v << endl;
+        }
+    }
+};
 
     int main()
     {
@@ -500,22 +779,35 @@ public:
                 o.CalcSum(arr, x);
                 o.Max(arr, x);
                 o.SortAscending(arr, x);
+                o.Display(arr, x);
                 o.SortDeAscending(arr, x);
+                o.Display(arr, x);
                 o.Min(arr, x);
                 o.CalAverage(arr, x);
             }
             else if (c == 2) {
-                /* int d1, d2;
+                 int d1, d2,d3,d4;
                  cout << "enter num of R & C of array";
-                 cin >> d1 >> d2;
+                 cin >> d1 >> d2 >>d3>>d4;
 
-                   int** arr2 = new int*[d1];
+                   int** x = new int*[d1];
                       for (int i = 0; i < d1; i++) {
-                       arr2[i] = new int[d2];
-                   }       */
+                       x[i] = new int[d2];
+                   }   
+                      int** s = new int*[d3];
+                      for (int i = 0; i < d3; i++) {
+                       s[i] = new int[d4];
+                   }  
+                     /* o.inputArray(x, d1, d2);
+                      o.sort(x,d1,d2);
+                     
+                      o.sorthhh(x, d1, d2);*/
+                   /*   o.sum2darray(x, d1, d2, s, d3, d4);*/
+                      o.prod2darray(x, d1, d2, s, d3, d4);
+
 
             }
-            else if (c == 3) {}
+            /*else if (c == 3) {}*/
             else
                 cout << "invalid choose:( ";
         }
