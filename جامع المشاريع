@@ -309,26 +309,7 @@ void prod2darray(int** array, int rows, int cols, int** array2, int rows2, int c
 };
 //ok
 
-class MyArrays2D {
-public:
-    void input(int arr[][100], int rows, int cols) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cout << "arr[" << i << "][" << j << "]: ";
-                cin >> arr[i][j];
-            }
-        }
-    }
 
-    void output(int arr[][100], int rows, int cols) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cout << arr[i][j] << " ";
-            }
-            cout << endl;
-        }
-    }
-};
 //doesnt work,why?? I don't know
 
 
@@ -653,7 +634,58 @@ public:
 
     };
 //-Q by Array
+class MMQ {
+public:
+    int f;
+    int b;
+    int c;
+    int* arr;
+    MMQ(int C) {
+        arr = new int[C];
+        c = C;
+        f = -1;
+        b = -1;
+    }
+    bool isfull()
+    {
+        if (b == c - 1) return 1;
+        else return 0;
+    }
+    bool isempty()
+    {
+        if (f == -1 && b == -1) return 1;
+        else return 0;
+    }
+    void inQ(int x) {
+        if (isfull()) cout << "IS FULL:(";
+        else if (isempty()) {
+            arr[++f] = x;
+            b++;
+        }
+        else
+            arr[++b] = x;
+    }
+    void dq()
+    {
+        if (isempty()) cout << "CANT DQ ";
+        else
+            cout << arr[++f] << " is deleted ";
+    }
+    void print()
+    {
+        for (int i = f; i <= b; i++)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << "\n";
+    }
+    void front()
+    {
+        if (isempty()) cout << "mpty:(";
+        else cout << arr[f];
+    }
 
+};
  //-Q by linkedlist 
 struct Onsor {
     int data;
@@ -757,17 +789,19 @@ class QList {
 
 
         MyArrays1D o;
-        MyArrays2D z;
+       
         Linked R;
         Stackyy re;
         stackByLinkedList O;
+        QList S;
         int x;
 
         int choose;
-        cout << "\n1-arrays\n 2-recursion\n 3-linked list\n 4-stack\n Queue:  ";
+        cout << "\n1-arrays\n2-recursion\n3-linked list\n4-stack\n5-Queue:  ";
         cin >> choose;
         if (choose == 1)
-        {
+        { while (true) {
+            
             int c;
             cout << "1-1d array \n 2-2d array \n 3-2d array sum & product: ";
             cin >> c;
@@ -786,30 +820,85 @@ class QList {
                 o.CalAverage(arr, x);
             }
             else if (c == 2) {
-                 int d1, d2,d3,d4;
-                 cout << "enter num of R & C of array";
-                 cin >> d1 >> d2 >>d3>>d4;
+                int d1, d2;
+                cout << "enter num of R & C of array";
+                cin >> d1 >> d2;
 
-                   int** x = new int*[d1];
-                      for (int i = 0; i < d1; i++) {
-                       x[i] = new int[d2];
-                   }   
-                      int** s = new int*[d3];
-                      for (int i = 0; i < d3; i++) {
-                       s[i] = new int[d4];
-                   }  
-                     /* o.inputArray(x, d1, d2);
-                      o.sort(x,d1,d2);
-                     
-                      o.sorthhh(x, d1, d2);*/
-                   /*   o.sum2darray(x, d1, d2, s, d3, d4);*/
-                      o.prod2darray(x, d1, d2, s, d3, d4);
+                int** x = new int* [d1];
+                for (int i = 0; i < d1; i++) {
+                    x[i] = new int[d2];
+                }
+                cout << "1- sum&avg\n2-sorting\n3-MAX&MIN";
+                int u;
+                cin >> u;
+                if (u == 1) {
+                    o.inputArray(x, d1, d2);
+                    cout << "sum is: " << o.calculateSum(x, d1, d2) << endl;
+                    cout << "avg is :" << o.calculateAverage(x, d1, d2);
+                }
+                else if (u == 2) {
+                    o.inputArray(x, d1, d2);
+                    o.sort(x, d1, d2);
+                    cout << endl;
+                    o.sorthhh(x, d1, d2);
+
+                }
+                else if (u == 3) {
+                    o.inputArray(x, d1, d2);
+                    cout << "max is: " << o.findMax(x, d1, d2);
+                    cout << "min is: " << o.findMin(x, d1, d2);
+
+                }
+
+
+
 
 
             }
-            /*else if (c == 3) {}*/
+            else if (c == 3) {
+                int d1, d2, d3, d4;
+                cout << "enter num of R1 , C1 && R2 , C2 of array";
+                cin >> d1 >> d2 >> d3 >> d4;
+
+                int** x = new int* [d1];
+                for (int i = 0; i < d1; i++) {
+                    x[i] = new int[d2];
+                }
+                int** s = new int* [d3];
+                for (int i = 0; i < d3; i++) {
+                    s[i] = new int[d4];
+                }
+
+                int sr;
+                cout << "1-sum\n2-product";
+                cin >> sr;
+                if (sr == 1)
+                {
+                    if (d1 == d3 && d2 == d4)
+                    {
+                        o.sum2darray(x, d1, d2, s, d3, d4);
+                    }
+                    else
+                        cout << "cant sum beacause not matching:(";
+
+                }
+                else if (sr == 2)
+                {
+                    if (d2 == d3)
+                        o.prod2darray(x, d1, d2, s, d3, d4);
+                    else
+                        cout << "nott maching";
+
+                }
+
+
+
+
+            }
             else
                 cout << "invalid choose:( ";
+        }
+          
         }
         //recursion
         else if (choose == 2) {//recursion
@@ -879,7 +968,7 @@ class QList {
             int ch1;
             int ch2;
             while (true) {
-                cout << "press1 --> technoFunction ::: press 2 --> bultin stack :: 3-stack by linked list:) ";
+                cout << "press1 --> MyFunction ::: press 2 --> bultin stack :: 3-stack by linked list:) ";
                 cin >> ch;
 
 
@@ -1020,8 +1109,72 @@ class QList {
                     }
                     else cout << "invalid choose:(";
                 }
-                /* else if (cho == 2) {}
-                 else if (cho == 3) {}*/
+                 else if (cho == 2) {
+                    int z;
+                    int val;
+                    int l;
+                    cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD";
+                    cin >> l;
+                    if (l==1)
+                    {
+                    cout << "enter the size of array: ";
+                    cin >> z;
+                    MMQ f(z);
+                   
+                   
+                    for (int i = 0; i < z; i++)
+                    {
+                        cin >> val;
+                        f.inQ(val);
+                    }
+                    }
+                    else if (l==2)
+                    {
+                        MMQ f(z);
+                        f.dq();
+                    }
+                    else if (l==3)
+                    {
+                        MMQ f(z);
+                        f.print();
+                    }
+                    else if (l == 4) {
+                        MMQ f(z);
+                        f.front();
+                    }
+                    
+                    
+                    
+
+                }
+                 else if (cho == 3) {
+                    int l;
+                    cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD";
+                    cin >> l;
+                    if (l == 1) {
+                        int c, s;
+                        cout << "enter num of element: ";
+                        cin>>c;
+                        for (int i = 0; i < c; i++) {
+                            cin >> s;
+                            S.spushL(s);
+
+                        }
+                     
+                    }
+                    else if (l == 2) {
+                        S.spopL();
+                    }
+                    else if (l == 3) {
+                        S.sdisplayL();
+                    }
+                    else if (l == 4) {
+                       S.speekL();
+                    }
+                    else cout << "invalid choose:(";
+
+                
+                }
                 else cout << "invalid choose";
             }
         }
