@@ -434,12 +434,14 @@ public:
 stack <int > mystack;
 //????? ?????? ????? ??????? ??? ?? ???? ?????? ?????
 void print_stackelement() {
-    if (mystack.empty()) cout << "empty:( \n";
-	while (!mystack.empty())
+    stack <int > temp = mystack;
+
+    if (temp.empty()) cout << "empty:( \n";
+	while (!temp.empty())
 	{
 		
-			cout <<mystack.top()<<endl;
-			mystack.pop();
+			cout << temp.top()<<endl;
+            temp.pop();
 		
 	}
 	
@@ -580,6 +582,63 @@ public:
 
 class Recursion
 {
+public:
+
+     long factorialRecursive(int n) {
+        if (n <= 1)
+            return 1; // Base case
+        return n * factorialRecursive(n - 1); 
+    }
+
+    
+     long factorialIterative(int n) {
+        unsigned long long result = 1;
+        for (int i = 2; i <= n; ++i) {
+            result *= i;
+        }
+        return result;
+    }
+     //////////////////////
+     int fibonacciRecursive(int n) {
+         if (n <= 1)
+             return n; 
+         return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2); 
+     }
+
+     void fibonacciIterative(int n) {
+         int a = 0, b = 1, c;
+
+         cout << "Fibonacci Series (Iterative): ";
+         if (n >= 1)
+             cout << a << " ";
+         if (n >= 2)
+             cout << b << " ";
+
+         for (int i = 3; i <= n; ++i) {
+             c = a + b; 
+             cout <<c << " ";
+             a = b; 
+             b = c;
+
+         }
+         cout << endl;
+     }
+     //tower of hanoi
+     void towerOfHanoi(int n, char source, char auxiliary, char destination) {
+         if (n == 1) {
+             cout << "Move disk 1 from " << source << " to " << destination << endl;
+             return;
+         }
+
+         // Step 1: Move n-1 disks from source to auxiliary
+         towerOfHanoi(n - 1, source, destination, auxiliary);
+
+         // Step 2: Move the nth disk from source to destination
+         cout << "Move disk " << n << " from " << source << " to " << destination << endl;
+
+         // Step 3: Move n-1 disks from auxiliary to destination
+         towerOfHanoi(n - 1, auxiliary, source, destination);
+     }
 
 };
 class MyQueue {
@@ -669,7 +728,7 @@ public:
     {
         if (isempty()) cout << "CANT DQ ";
         else
-            cout << arr[++f] << " is deleted ";
+            cout << arr[f++] << " is deleted ";
     }
     void print()
     {
@@ -782,18 +841,13 @@ class QList {
 
     int main()
     {
-
-
-
-
-
-
         MyArrays1D o;
        
         Linked R;
         Stackyy re;
         stackByLinkedList O;
         QList S;
+        Recursion SR;
         int x;
 
         int choose;
@@ -803,7 +857,7 @@ class QList {
         { while (true) {
             
             int c;
-            cout << "1-1d array \n 2-2d array \n 3-2d array sum & product: ";
+            cout << "1-1d array \n 2-2d array \n 3-2d array sum & product\n 4-exit: ";
             cin >> c;
             if (c == 1) {
                 cout << "select element of array: ";
@@ -849,11 +903,6 @@ class QList {
                     cout << "min is: " << o.findMin(x, d1, d2);
 
                 }
-
-
-
-
-
             }
             else if (c == 3) {
                 int d1, d2, d3, d4;
@@ -870,7 +919,7 @@ class QList {
                 }
 
                 int sr;
-                cout << "1-sum\n2-product";
+                cout << "1-sum\n2-product\n3-exit";
                 cin >> sr;
                 if (sr == 1)
                 {
@@ -890,26 +939,98 @@ class QList {
                         cout << "nott maching";
 
                 }
-
-
-
-
+                else if (sr == 3)
+                    break;
             }
+            else if (c == 4)
+                break;
             else
                 cout << "invalid choose:( ";
         }
           
         }
         //recursion
-        else if (choose == 2) {//recursion
+        else if (choose == 2) {
+            //recursion
+            while (true){
+            int s;
+            cout << "1-fac rec\nfac ilt\n3-fippo ilt \n4-fippo rec\n5-towerof hanoi : ";
+            cin >> s;
+            if (s == 1) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Factorial is not defined for negative numbers." << endl;
+
+                }
+                cout << "fac is" << SR.factorialRecursive(val) << endl;
+            }
+            else if (s == 2) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Factorial is not defined for negative numbers." << endl;
+                    return 1;
+                }
+                cout << "fac is" << SR.factorialIterative(val) << endl;
+            }
+            else if (s == 3) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Fippo is not defined for negative numbers." << endl;
+                    return 1;
+                }
+
+                SR.fibonacciIterative(val);
 
 
+            }
+            else if (s == 4) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Fippo is not defined for negative numbers." << endl;
+                    return 1;
+                }
+                cout << "Fibonacci Series (Recursive): ";
+                for (int i = 0; i < val; ++i) {
+                    cout << SR.fibonacciRecursive(i) << " ";
+                }
+                cout << endl;
+            }
+            else if (s == 5) {
+                int ss;
+
+
+                cout << "Enter the number of disks: ";
+                cin >> ss;
+
+
+                if (ss <= 0) {
+                    cout << "Please enter a positive number of disks." << endl;
+                    return 1;
+                }
+
+                // Solve Tower of Hanoi
+                cout << "The sequence of moves is:" << endl;
+                SR.towerOfHanoi(ss, 'A', 'B', 'C'); // 
+
+            }
+            else
+                cout << "please enter num in range 1 and 5";
+
+        }
         }
         //linked
         else if (choose == 3) { //linked list
             while (1) {
                 int cho;
-                cout << "1-insert , 2- count , 3- search , 4-delete 5- show my list : ";
+                cout << "1-insert , 2- count , 3- search , 4-delete 5- show my list 6-exist : ";
                 cin >> cho;
 
                 if (cho == 1) {
@@ -949,16 +1070,13 @@ class QList {
                         cout << "list is empty \n";
                     else  R.print();
                 }
+                else if (cho == 6) { break; }
                 else cout << "invalid choose:(";
 
 
 
 
             }
-
-
-
-
         }
         //stack
 
@@ -968,13 +1086,13 @@ class QList {
             int ch1;
             int ch2;
             while (true) {
-                cout << "press1 --> MyFunction ::: press 2 --> bultin stack :: 3-stack by linked list:) ";
+                cout << "press1 --> MyFunction ::: press 2 --> bultin stack :: 3-stack by linked list:: 4-exit) ";
                 cin >> ch;
 
 
                 if (ch == 1) {
                     /////////////////////////////////
-                    cout << "1-push . 2-pop . 3- top . 4-print";
+                    cout << "1-push . 2-pop . 3- top . 4-print 5-exit: ";
                     cin >> ch1;
 
                     if (ch1 == 1) {
@@ -995,6 +1113,8 @@ class QList {
                         cout << re.rpeek();
                     else if (ch1 == 4)
                         re.rdisplay();
+                    else if (ch1 == 4)
+                        break;
                     else
                         cout << "error 404";
                 }
@@ -1072,14 +1192,11 @@ class QList {
                         cout << "";
                     }
                 }
+                else if (ch == 4) { break; }
 
 
                 else
                     cout << "invalid choose *- press 1 or 2 ONLY";
-
-
-
-
             }
 
 
@@ -1089,67 +1206,90 @@ class QList {
             int cho;
             MyQueue Q;
             while (true) {
-                cout << "1-bult in Q , 2- Q By Array 3-Q by Linked List: ";
+                cout << "1-bult in Q , 2- Q By Array 3-Q by Linked List 4-exit: ";
                 cin >> cho;
                 if (cho == 1) {
-                    int l;
-                    cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD";
-                    cin >> l;
-                    if (l == 1) {
-                        Q.inqueubn();
-                    }
-                    else if (l == 2) {
-                        Q.dequeuebn();
-                    }
-                    else if (l == 3) {
+                    while (true) {
+                        int l;
+                        cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD 5-exit";
+                        cin >> l;
+                        if (l == 1) {
+                            Q.inqueubn();
+                        }
+                        else if (l == 2) {
+                            Q.dequeuebn();
+                        }
+                        else if (l == 3) {
                             Q.print_Qelementbn();
+                        }
+                        else if (l == 4) {
+                            Q.showfrontbn();
+                        }
+                        else if (l == 5)
+                            break;
+                        else cout << "invalid choose:(";
                     }
-                    else if (l == 4) {
-                        Q.showfrontbn();
-                    }
-                    else cout << "invalid choose:(";
                 }
                  else if (cho == 2) {
-                    int z;
-                    int val;
-                    int l;
-                    cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD";
-                    cin >> l;
-                    if (l==1)
-                    {
-                    cout << "enter the size of array: ";
-                    cin >> z;
-                    MMQ f(z);
-                   
-                   
-                    for (int i = 0; i < z; i++)
-                    {
-                        cin >> val;
-                        f.inQ(val);
-                    }
-                    }
-                    else if (l==2)
-                    {
-                        MMQ f(z);
-                        f.dq();
-                    }
-                    else if (l==3)
-                    {
-                        MMQ f(z);
-                        f.print();
-                    }
-                    else if (l == 4) {
-                        MMQ f(z);
-                        f.front();
-                    }
-                    
-                    
-                    
+                    int z = 0;
+                    MMQ* queue = nullptr;
 
+                    while (true) {
+                        cout << "1- INQUEUE\n2- DEQUEUE\n3- SHOW ALL ELEMENTS\n4- SHOW HEAD\n5- EXIT\n";
+                        int l;
+                        cin >> l;
+
+                        if (l == 1) {
+                           
+                                cout << "Enter the size of the array: ";
+                                cin >> z;
+                                queue = new MMQ(z);
+                          
+                            for (int i=0 ; i<z;i++) {
+                            int val;
+                            cout << "Enter value to enqueue: ";
+                            cin >> val;
+                            queue->inQ(val);
+                            }
+                        }
+                        else if (l == 2) {
+                            if (queue) {
+                                queue->dq();
+                            }
+                            else {
+                                cout << "Queue not initialized!\n";
+                            }
+                        }
+                        else if (l == 3) {
+                            if (queue) {
+                                queue->print();
+                            }
+                            else {
+                                cout << "Queue not initialized!\n";
+                            }
+                        }
+                        else if (l == 4) {
+                            if (queue) {
+                                queue->front();
+                            }
+                            else {
+                                cout << "Queue not initialized!\n";
+                            }
+                        }
+                        else if (l == 5) {
+                            break;
+                        }
+                        else {
+                            cout << "Invalid option! Try again.\n";
+                        }
+                    }
+
+                    delete queue; // Clean memry
                 }
                  else if (cho == 3) {
+                    while (1){
                     int l;
-                    cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD";
+                    cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD 5-exit";
                     cin >> l;
                     if (l == 1) {
                         int c, s;
@@ -1160,7 +1300,6 @@ class QList {
                             S.spushL(s);
 
                         }
-                     
                     }
                     else if (l == 2) {
                         S.spopL();
@@ -1170,12 +1309,17 @@ class QList {
                     }
                     else if (l == 4) {
                        S.speekL();
+                    }  else if (l == 5) {
+                        break;
                     }
-                    else cout << "invalid choose:(";
 
+                    else cout << "invalid choose:(";
+                    }
                 
                 }
+                 else if (cho == 4) { break; }
                 else cout << "invalid choose";
+
             }
         }
 
