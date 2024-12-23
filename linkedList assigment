@@ -1,108 +1,1335 @@
 #include <iostream>
+#include <stack>
+#include <queue>
 using namespace std;
-struct Node {
-	int data;
-	Node* next;
-};
-class linked
+
+
+
+
+class MyArrays1D {
+public:
+    
+    void Display(int arr[], int size) {
+        for (int i = 0; i < size; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << "\n";
+    }
+
+void ReadArray(int arr[], int size)
 {
-public :
-	Node* head;
-	linked()
+    cout << "Enter "<<size << " elements: ";
+    cout << "\n";
+    for (size_t i = 0; i < size; i++)
+    {
+        cout << "Enter element number" << i + 1 << " : ";
+        cin >> arr[i];
+    }
+}
+
+void CalcSum(int arr[], int size)
+{
+    int sum = 0;
+    for (int i = 0; i < size; i++)
+    {
+        sum = sum + arr[i];
+    }
+    cout << "The sum = " << sum << endl;
+    cout << "-------------------------------------------\n";
+
+}
+
+void CalAverage(int arr[], int size)
+{
+    int sum = 0;
+    for (int i = 0; i < size; i++)
+    {
+        sum = sum + arr[i];
+    }
+    cout << "The Average = " << (float)sum / size << endl;
+    cout << "-------------------------------------------\n";
+
+}
+
+void SortAscending(int arr[], int size)
+{
+
+    int temp = 0;
+    for (int j = 0; j < size; j++)
+        for (int i = 0; i < size - 1; i++)// 3 8 0 7 >> 8 3 0 7 > 
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                temp = arr[i];  // temp=8
+                arr[i] = arr[i + 1]; // arr[1]=0 >> 3 0 0 7
+                arr[i + 1] = temp; // arr[2]=8 >>   3 0 8 7
+            }
+        }
+   /* cout << "array after Acending: ";
+
+  
+  cout << "-------------------------------------------\n";*/
+
+}
+void SortDeAscending(int arr[], int size)
+{
+
+    int temp = 0;
+    for (int j = 0; j < size; j++)
+        for (int i = 0; i < size - 1; i++)// 3 8 0 7 >> 8 3 0 7 > 
+        {
+            if (arr[i] < arr[i + 1])
+            {
+                temp = arr[i];  // temp=8
+                arr[i] = arr[i + 1]; // arr[1]=0 >> 3 0 0 7
+                arr[i + 1] = temp; // arr[2]=8 >>   3 0 8 7
+            }
+        }
+  /*  cout << "array after deAcending: ";
+
+   
+    cout << "-------------------------------------------\n";*/
+
+}
+
+void Min(int arr[], int size)
+{
+    int min = INT_MAX; //0
+    for (int i = 0; i < size; i++)
+    {
+        if (min > arr[i])
+        {
+            min = arr[i];
+        }
+    }
+    cout << "min value of arry = " << min << endl;
+    cout << "-------------------------------------------\n";
+}
+void Max(int arr[], int size)
+{
+    int max = INT_MIN;
+    for (int i = 0; i < size; i++)
+    {
+        if (max < arr[i]) //max 3  >>-1
+        {
+            max = arr[i];
+        }
+    }
+    cout << "max value of arry = " << max << endl;
+    cout << "-------------------------------------------\n";
+
+}
+
+//2d 
+void inputArray(int** array, int rows, int cols) {
+    cout << "Enter elements of the array:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> array[i][j];
+        }
+    }
+}
+
+// Function to calculate the sum of all elements
+int calculateSum(int** array, int rows, int cols) {
+    int sum = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            sum += array[i][j];
+        }
+    }
+    return sum;
+}
+
+// Function to calculate the average of all elements
+double calculateAverage(int** array, int rows, int cols) {
+    int sum = calculateSum(array, rows, cols);
+    return static_cast<double>(sum) / (rows * cols);
+}
+void sort(int** array, int rows, int cols)
+{
+    int* arr = new int[rows * cols];
+    int v = 0;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            arr[v++] = array[i][j];
+        }
+    }
+    SortAscending(arr, v);
+    Display(arr, v);
+  /*  for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            array[i][j]= arr[v++];
+        }
+    }*/
+    //printArray( array,rows, cols);
+
+
+}
+void sorthhh(int** array, int rows, int cols)
+{
+    int* arr = new int[rows * cols];
+    int v = 0;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            arr[v++] = array[i][j];
+        }
+    }
+    SortDeAscending(arr, v);
+    Display(arr, v);
+    /*  for (int i = 0; i < rows; i++)
+      {
+          for (int j = 0; j < cols; j++)
+          {
+              array[i][j]= arr[v++];
+          }
+      }*/
+      //printArray( array,rows, cols);
+
+
+}
+
+
+// Function to find the maximum value
+int findMax(int** array, int rows, int cols) {
+    int maxVal = array[0][0];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (array[i][j] > maxVal) {
+                maxVal = array[i][j];
+            }
+        }
+    }
+    return maxVal;
+}
+
+// Function to find the minimum value
+int findMin(int** array, int rows, int cols) {
+    int minVal = array[0][0];
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (array[i][j] < minVal) {
+                minVal = array[i][j];
+            }
+        }
+    }
+    return minVal;
+}
+
+// Function to print the array
+void printArray(int** array, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << array[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+//2d sum and multy:(
+void inputArray1(int** array, int rows, int cols) {
+    cout << "Enter elements of the array:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> array[i][j];
+        }
+    }
+}
+
+void inputArray2(int** array2, int rows2, int cols2) {
+    cout << "Enter elements of the array:" << endl;
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+            cin >> array2[i][j];
+        }
+    }
+}
+void sum2darray(int** array, int rows, int cols, int** array2, int rows2, int cols2)
+{
+     inputArray1( array,  rows,  cols);
+     inputArray2( array2,  rows2,  cols2);
+    int** arr3 = new int* [rows];
+    for (int i = 0; i < rows; i++)
+    {
+        arr3[i] = new int[cols];
+    }
+
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+            arr3[i][j] = array[i][j] + array2[i][j];
+        }
+    } 
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+           cout<< arr3[i][j] <<" ";
+        }
+        cout << "\n";
+    }
+
+    
+
+}
+void prod2darray(int** array, int rows, int cols, int** array2, int rows2, int cols2)
+{
+    inputArray1(array, rows, cols);
+    inputArray2(array2, rows2, cols2);
+    int** arr3 = new int* [rows];
+    for (int i = 0; i < rows; i++)
+    {
+        arr3[i] = new int[cols2];
+    }
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols2; j++) {
+            int result = 0;
+            for (int k = 0; k < rows2; k++)
+            {
+                result += array[i][k] * array2[k][j];
+            }
+            arr3[i][j] = result;
+
+            
+        }
+    }
+    for (int i = 0; i < rows2; i++) {
+        for (int j = 0; j < cols2; j++) {
+            cout << arr3[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+
+
+}
+};
+//ok
+
+
+//doesnt work,why?? I don't know
+
+
+struct Node {
+    int data;
+    Node* next;
+};
+class Linked
+{
+public:
+    Node* head;
+    Linked()
+    {
+
+        head = NULL;
+
+    }
+    bool isempt()
+    {
+        if (head == NULL) return true;
+        else return false;
+    }
+
+    void insert(int x)
+    {
+        if (isempt())
+        {
+            Node* newnode = new Node();
+            newnode->data = x;
+            newnode->next = NULL;
+            head = newnode;
+        }
+        else {
+            Node* newnode = new Node();
+            newnode->data = x;
+            newnode->next = head;
+            head = newnode;
+        }
+    }
+    void print()
+    {
+        Node* temp = head;
+        while (temp != NULL)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << "\n";
+    }
+    int count()
+    {
+        int c = 0;
+        Node* re = head;
+        while (re != NULL)
+        {
+
+            c++;
+            re = re->next;
+        }
+        return c;
+    }
+    bool search(int vall)
+    {
+        int f = 0;
+        Node* temp = head;
+        while (temp != nullptr)
+        {
+            if (temp->data == vall)
+            {
+                return 1;
+                f = 1;
+                break;
+            }
+            temp = temp->next;
+        }
+        if (f == 0) return 0;
+    }
+
+    void delete_o(int val)
+    {
+        if (isempt())
+        {
+            cout << "its empty_y\n";
+        }
+        else {
+            if (search(val)) {
+                Node* temp = head;
+                if (temp->data == val)
+                {
+                    head = temp->next;
+                    delete temp;
+                }
+                else {
+                    while (temp->next != NULL)
+                    {
+                        if (temp->next->data == val)
+                        {
+                            Node* r = temp->next;
+                            temp->next = temp->next->next;
+                            delete r;
+                        }
+                        else
+                            temp = temp->next;
+                    }
+                }
+            }
+            else
+            {
+                cout << "the element is not exist:(";
+            }
+        }
+    }
+}; 
+//ok
+
+#define SIZE 5
+class Stackyy {
+public:
+	int stacky[SIZE];
+	int top = -1;
+
+stack <int > mystack;
+//????? ?????? ????? ??????? ??? ?? ???? ?????? ?????
+void print_stackelement() {
+    stack <int > temp = mystack;
+
+    if (temp.empty()) cout << "empty:( \n";
+	while (!temp.empty())
 	{
 		
-		head = NULL;
-
-	}
-	bool isempt()
-	{
-		if (head == NULL) return true;
-		else return false;
-	}
-
-	void insert(int x)
-	{
-		if (isempt())
-		{
-			Node* newnode = new Node();
-			newnode->data = x;
-			newnode->next = NULL;
-			head = newnode;
-		}
-		else {
-			Node* newnode = new Node();
-			newnode->data = x;
-			newnode->next = head;
-			head = newnode;
-		}
-	}
-	void print()
-	{
-		Node* temp =head;
-		while (temp != NULL)
-		{
-			cout << temp->data << " ";
-			temp = temp->next;
-		}
-		cout << "\n";
-	}
-	void count()
-	{int count = 0;
-		Node* re = head;
-		while (re != NULL)
-		{
-			
-			count++;
-			re = re->next;
-		}
-		cout << "num of element is : " << count<<endl;
-	}
-	void search(int s)
-	{
-		int f = 0;
-		Node* temp = head;
-		while (temp != NULL)
-		{
-			if (temp->data == s)
-			{
-				cout << "num is exist:) \n"; f = 1;
-				break;
-			}
-			temp = temp->next;
-		}
-
-		if (f==0) cout << "num not exist:(";
-	}
-};
-int main() {
-	linked ob;
-	int ch, nval,val;
-	while (true)
-	{
-		cout << " \n 1- Add \n 2- display \n 3-count \n";
-		cin >> ch;
-		switch (ch)
-		{case 1:
-			cout << "enter num of value :";
-			cin >> nval;
-			 
-			for (int i = 0; i < nval; i++)
-			{
-				cin >> val;
-				ob.insert(val);
-			}
-		    break;
-		case 2:
-			ob.print();
-			break;
-		case 3:
-			ob.count();
-			break;
-		default:
-			cout << "invalid choose:(";
-
-
-		}
+			cout << temp.top()<<endl;
+            temp.pop();
+		
 	}
 	
 }
+//////////////////// my functions ///////////
+void rpush(int value)
+{
+
+	if (top >= SIZE - 1)
+	{
+		cout << "stack overflow \n";
+	}
+	else {
+
+		stacky[++top] = value;
+	}
+}
+int rpop() {
+
+	if (top == -1)
+	{
+		cout << "stack underflow \n";
+	}
+	else
+	{
+		return stacky[top--];
+	}
+}
+int rpeek() {
+
+	if (top == -1)
+	{
+		cout << "stack underflow \n";
+	}
+	else
+	{
+		return stacky[top];
+	}
+}
+void rdisplay()
+{
+
+	if (top == -1)
+	{
+		cout << "stack underflow \n";
+	}
+	else {
+		for (int i = top; i >= 0; i--)
+		{
+			cout << stacky[i] << endl;
+		}
+	}
+
+}
+bool isempty()
+{
+	if (top == -1) return 1;
+	else return 0;
+}
+bool isfull()
+{
+	if (top = (SIZE - 1)) return 1;
+	else return 0;
+}
+
+
+};
+//stack by array
+
+
+struct Element {
+    int data;
+    Element* next;
+};
+class stackByLinkedList {
+public:
+    Element* top;
+    stackByLinkedList()
+    {
+
+        top = NULL;
+
+    }
+    bool Empty()
+    {
+        if (top == NULL) return true;
+        else return false;
+    }
+    void pushL(int x) {
+        if (Empty())
+        { 
+        Element* newnode = new Element();
+        newnode->data = x;
+        newnode->next = NULL;
+        top = newnode;
+        }
+        else {
+            Element* newnode = new Element();
+            newnode->data = x;
+            newnode->next = top;
+            top = newnode;
+        }
+    }
+    void peekL()
+    {
+        if (Empty()) cout << "stack under flow:(\n";
+        else {
+            Element* temp = top;
+
+            cout <<"top is: " << temp->data << "\n";
+        }
+    }
+
+    void displayL()
+    {
+        if (Empty())  cout << "stack under flow:(\n";
+        Element* temp = top;
+        while (temp != NULL)
+        {
+            cout << temp->data << "\n";
+            temp = temp->next;
+        }
+        cout << "\n";
+    }
+    void popL() {
+        int v;
+        if (top == NULL) cout << "stack under flow:(\n";
+        else {
+            Element* temp = top;
+            top = temp->next;
+            v = temp->data;
+            delete temp;
+            cout <<"deleteed is : " << v<<endl;
+        }
+    }
+};
+//satck by list
+
+class Recursion
+{
+public:
+
+     long factorialRecursive(int n) {
+        if (n <= 1)
+            return 1; // Base case
+        return n * factorialRecursive(n - 1); 
+    }
+
+    
+     long factorialIterative(int n) {
+        unsigned long long result = 1;
+        for (int i = 2; i <= n; ++i) {
+            result *= i;
+        }
+        return result;
+    }
+     //////////////////////
+     int fibonacciRecursive(int n) {
+         if (n <= 1)
+             return n; 
+         return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2); 
+     }
+
+     void fibonacciIterative(int n) {
+         int a = 0, b = 1, c;
+
+         cout << "Fibonacci Series (Iterative): ";
+         if (n >= 1)
+             cout << a << " ";
+         if (n >= 2)
+             cout << b << " ";
+
+         for (int i = 3; i <= n; ++i) {
+             c = a + b; 
+             cout <<c << " ";
+             a = b; 
+             b = c;
+
+         }
+         cout << endl;
+     }
+     //tower of hanoi
+     void towerOfHanoi(int n, char source, char auxiliary, char destination) {
+         if (n == 1) {
+             cout << "Move disk 1 from " << source << " to " << destination << endl;
+             return;
+         }
+
+         // Step 1: Move n-1 disks from source to auxiliary
+         towerOfHanoi(n - 1, source, destination, auxiliary);
+
+         // Step 2: Move the nth disk from source to destination
+         cout << "Move disk " << n << " from " << source << " to " << destination << endl;
+
+         // Step 3: Move n-1 disks from auxiliary to destination
+         towerOfHanoi(n - 1, auxiliary, source, destination);
+     }
+
+};
+class MyQueue {
+public:
+    //-Q by bultIn 
+    queue <int> MQ;
+    void print_Qelementbn() {
+        queue <int> temp = MQ;
+        if (temp.empty())
+            cout << "empty:( \n";
+        
+        while (!temp.empty())
+        {
+
+            cout << temp.front() << endl;
+            temp.pop();
+
+        }
+
+    }
+
+
+    void inqueubn() {
+        int n;
+        int v;
+        cout << "enter_the_num_of_element: ";
+        cin >> n;
+        for (int i = 0; i < n; i++) {
+            cin >> v;
+            MQ.push(v);
+
+        }
+    }
+    void dequeuebn (){
+        if (MQ.empty()) cout << "cant dequeue :( Q is empty";
+        else
+            MQ.pop();
+    }
+
+    void showfrontbn (){
+        if (MQ.empty()) cout << "cant show HEAD :( Q is empty";
+        else
+            cout << "front is: " << MQ.front();
+    }
+
+        
+       
+        // 
+       
+
+
+
+    };
+//-Q by Array
+class MMQ {
+public:
+    int f;
+    int b;
+    int c;
+    int* arr;
+    MMQ(int C) {
+        arr = new int[C];
+        c = C;
+        f = -1;
+        b = -1;
+    }
+    bool isfull()
+    {
+        if (b == c - 1) return 1;
+        else return 0;
+    }
+    bool isempty()
+    {
+        if (f == -1 && b == -1) return 1;
+        else return 0;
+    }
+    void inQ(int x) {
+        if (isfull()) cout << "IS FULL:(";
+        else if (isempty()) {
+            arr[++f] = x;
+            b++;
+        }
+        else
+            arr[++b] = x;
+    }
+    void dq()
+    {
+        if (isempty()) cout << "CANT DQ ";
+        else
+            cout << arr[f++] << " is deleted ";
+    }
+    void print()
+    {
+        for (int i = f; i <= b; i++)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << "\n";
+    }
+    void front()
+    {
+        if (isempty()) cout << "mpty:(";
+        else cout << arr[f];
+    }
+
+};
+ //-Q by linkedlist 
+struct Onsor {
+    int data;
+    Onsor* next;
+};
+class QList {
+
+    //push (insert last)
+    //pop (delete first)
+    //top 
+    //display
+ public:
+    Onsor* top;
+    QList()
+    {
+
+        top = NULL;
+
+    }
+    bool sEmpty()
+    {
+        if (top == NULL) return true;
+        else return false;
+    }
+    void insert(int x)
+    {
+        if (sEmpty())
+        {
+            Onsor* newnode = new Onsor();
+            newnode->data = x;
+            newnode->next = NULL;
+            top = newnode;
+        }
+        else {
+            Onsor* newnode = new Onsor();
+            newnode->data = x;
+            newnode->next = top;
+            top = newnode;
+        }
+    }
+    void spushL(int x) {
+
+        if (sEmpty())
+        {
+            insert(x);
+
+
+        }
+        else {
+            Onsor* temp = top;
+            while (temp->next != 0)
+            {
+                temp = temp->next;
+            }
+            Onsor* newnode = new Onsor();
+            newnode->data = x;
+            newnode->next = temp->next;
+            temp->next = newnode;
+        }
+    }
+    void speekL()
+    {
+        if (sEmpty()) cout << "stack under flow:(\n";
+        else {
+            Onsor* temp = top;
+
+            cout << "top is: " << temp->data << "\n";
+        }
+    }
+
+    void sdisplayL()
+    {
+        if (sEmpty())  cout << "stack under flow:(\n";
+        Onsor* temp = top;
+        while (temp != NULL)
+        {
+            cout << temp->data << "\n";
+            temp = temp->next;
+        }
+        cout << "\n";
+    }
+    void spopL() {
+        int v;
+        if (top == NULL) cout << "stack under flow:(\n";
+        else {
+            Onsor* temp = top;
+            top = temp->next;
+            v = temp->data;
+            delete temp;
+            cout << "deleteed is : " << v << endl;
+        }
+    }
+};
+
+    int main()
+    {
+        MyArrays1D o;
+       
+        Linked R;
+        Stackyy re;
+        stackByLinkedList O;
+        QList S;
+        Recursion SR;
+        int x;
+
+        int choose;
+        cout << "\n1-arrays\n2-recursion\n3-linked list\n4-stack\n5-Queue\n";
+        cout << "enter your chhose:";
+        cin >> choose;
+        if (choose == 1)
+        { while (true) {
+            
+            int c;
+            cout << "1-1d array \n 2-2d array \n 3-2d array sum & product\n ";
+            cout << "enter your chhose:";
+            cin >> c;
+            if (c == 1) {
+                cout << "select element of array: ";
+                cin >> x;
+                int* arr = new int[x];
+                o.ReadArray(arr, x);
+                o.CalcSum(arr, x);
+                o.Max(arr, x);
+                o.SortAscending(arr, x);
+                o.Display(arr, x);
+                o.SortDeAscending(arr, x);
+                o.Display(arr, x);
+                o.Min(arr, x);
+                o.CalAverage(arr, x);
+            }
+            else if (c == 2) {
+                int d1, d2;
+                cout << "enter num of R & C of array";
+                cin >> d1 >> d2;
+
+                int** x = new int* [d1];
+                for (int i = 0; i < d1; i++) {
+                    x[i] = new int[d2];
+                }
+                cout << "1- sum&avg\n2-sorting\n3-MAX&MIN";
+                int u;
+                cin >> u;
+                if (u == 1) {
+                    o.inputArray(x, d1, d2);
+                    cout << "sum is: " << o.calculateSum(x, d1, d2) << endl;
+                    cout << "avg is :" << o.calculateAverage(x, d1, d2);
+                }
+                else if (u == 2) {
+                    o.inputArray(x, d1, d2);
+                    o.sort(x, d1, d2);
+                    cout << endl;
+                    o.sorthhh(x, d1, d2);
+
+                }
+                else if (u == 3) {
+                    o.inputArray(x, d1, d2);
+                    cout << "max is: " << o.findMax(x, d1, d2);
+                    cout << "min is: " << o.findMin(x, d1, d2);
+
+                }
+            }
+            else if (c == 3) {
+                int d1, d2, d3, d4;
+                cout << "enter num of R1 , C1 && R2 , C2 of array";
+                cin >> d1 >> d2 >> d3 >> d4;
+
+                int** x = new int* [d1];
+                for (int i = 0; i < d1; i++) {
+                    x[i] = new int[d2];
+                }
+                int** s = new int* [d3];
+                for (int i = 0; i < d3; i++) {
+                    s[i] = new int[d4];
+                }
+
+                int sr;
+                cout << "1-sum\n2-product\n3-exit\n";
+                cout << "enter your chhose:";
+                cin >> sr;
+                if (sr == 1)
+                {
+                    if (d1 == d3 && d2 == d4)
+                    {
+                        o.sum2darray(x, d1, d2, s, d3, d4);
+                    }
+                    else
+                        cout << "cant sum beacause not matching:(";
+
+                }
+                else if (sr == 2)
+                {
+                    if (d2 == d3)
+                        o.prod2darray(x, d1, d2, s, d3, d4);
+                    else
+                        cout << "nott maching";
+
+                }
+                else if (sr == 3)
+                    break;
+            }
+            else if (c == 4)
+                break;
+            else
+                cout << "invalid choose:( ";
+        }
+          
+        }
+        //recursion
+        else if (choose == 2) {
+            //recursion
+            while (true){
+            int s;
+            cout << "1-fac rec\nfac ilt\n3-fippo ilt \n4-fippo rec\n5-towerof hanoi : "<<endl;
+            cout << "enter your chhose:";
+            cin >> s;
+            if (s == 1) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Factorial is not defined for negative numbers." << endl;
+
+                }
+                cout << "fac is" << SR.factorialRecursive(val) << endl;
+            }
+            else if (s == 2) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Factorial is not defined for negative numbers." << endl;
+                    return 1;
+                }
+                cout << "fac is" << SR.factorialIterative(val) << endl;
+            }
+            else if (s == 3) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Fippo is not defined for negative numbers." << endl;
+                    return 1;
+                }
+
+                SR.fibonacciIterative(val);
+
+
+            }
+            else if (s == 4) {
+                int val;
+                cout << "enter value: ";
+                cin >> val;
+                if (val < 0) {
+                    cout << "Fippo is not defined for negative numbers." << endl;
+                    return 1;
+                }
+                cout << "Fibonacci Series (Recursive): ";
+                for (int i = 0; i < val; ++i) {
+                    cout << SR.fibonacciRecursive(i) << " ";
+                }
+                cout << endl;
+            }
+            else if (s == 5) {
+                int ss;
+
+
+                cout << "Enter the number of disks: ";
+                cin >> ss;
+
+
+                if (ss <= 0) {
+                    cout << "Please enter a positive number of disks." << endl;
+                    return 1;
+                }
+
+                // Solve Tower of Hanoi
+                cout << "The sequence of moves is:" << endl;
+                SR.towerOfHanoi(ss, 'A', 'B', 'C'); // 
+
+            }
+            else
+                cout << "please enter num in range 1 and 5";
+
+        }
+        }
+        //linked
+        else if (choose == 3) { //linked list
+            while (1) {
+
+                int cho;
+                cout << "1-insert (press -2004 to terminate input process) , 2- count , 3- search , 4-delete 5- show my list \n";
+                cout << "enter your chhose:";
+                cin >> cho;
+
+                if (cho == 1) {
+                    int num, va;
+                    //تم تعديل جزئية static linked list
+                    while (1){
+                        cin >> va;
+                        if (va == -2004) break;
+                        R.insert(va);
+                    }
+                    R.print();
+                }
+                else if (cho == 2)
+                {
+                    cout << "num of elements: " << R.count();
+                }
+                else if (cho == 3)
+                {
+                    int b;
+                    cout << "enter the num you want to search";
+                    cin >> b;
+                    if (R.search(b)) cout << b << " is exist";
+                    else cout << "not exist";
+                }
+                else if (cho == 4) {
+                    int num, va;
+                    cout << "enter num of values: ";
+                    cin >> num;
+                    for (int i = 0; i < num; i++) {
+                        cin >> va;
+                        R.delete_o(va);
+                    }
+                    R.print();
+                }
+                else if (cho == 5) {
+                    if (R.count() == 0)
+                        cout << "list is empty \n";
+                    else  R.print();
+                }
+                else if (cho == 6) { break; }
+                else cout << "invalid choose:(";
+
+
+
+
+            }
+        }
+        //stack
+
+        else if (choose == 4) {
+
+            int ch, t;
+            int ch1;
+            int ch2;
+            while (true) {
+                cout << "press1 --> MyFunction ::: press 2 --> bultin stack :: 3-stack by linked list::)\n ";
+                cout << "enter your chhose:";
+                cin >> ch;
+
+
+                if (ch == 1) {
+                    /////////////////////////////////
+                    cout << "1-push . 2-pop . 3- top . 4-print \n: ";
+                    cout << "enter your chhose:";
+                    cin >> ch1;
+
+                    if (ch1 == 1) {
+                        int n;
+                        int v;
+                        cout << "enter the num of element";
+                        cin >> n;
+                        for (int i = 0; i < n; i++) {
+
+                            cin >> v;
+                            re.rpush(v);
+                        }
+
+                    }
+                    else if (ch1 == 2)
+                        cout << "pop: " << re.rpop() << endl;
+                    else if (ch1 == 3)
+                        cout << re.rpeek();
+                    else if (ch1 == 4)
+                        re.rdisplay();
+                    else if (ch1 == 4)
+                        break;
+                    else
+                        cout << "error 404";
+                }
+
+
+                else if (ch == 2) {
+
+
+                    cout << "1-push . 2-pop . 3- top . 4-print";
+                    cin >> ch2;
+                    if (ch2 == 1) {
+
+                        int n;
+                        int v;
+                        cout << "enter the num of element";
+                        cin >> n;
+                        for (int i = 0; i < n; i++) {
+
+                            cin >> v;
+                            re.mystack.push(v);
+                        }
+                    }
+
+                    else if (ch2 == 2) {
+                        if (re.mystack.size() == 0) cout << "cant pop:( \n";
+                        else re.mystack.pop();
+                    }
+                    else if (ch2 == 3) {
+                        if (re.mystack.size() == 0) cout << "stack empty:( \n";
+
+                        else cout << re.mystack.top();
+                    }
+                    else if (ch2 == 4)
+
+                        re.print_stackelement();
+                    else
+                        cout << "error 404";
+                }
+
+                else if (ch == 3) {
+
+
+                    int ch3;
+                    cout << "1-push(press -2004 to terminate this process) . 2-pop . 3- top . 4-print\n";
+                    cout << "enter your chhose:";
+                    cin >> ch3;
+
+                    if (ch3 == 1) {
+                        int v;
+                       
+                      while (1){ //tru
+
+                            cin >> v;
+                            if (v == -2004) break;
+                            O.pushL(v);
+                      }
+                       
+                    }
+
+                    else if (ch3 == 2) {
+                        O.popL();
+                        cout << "";
+                    }
+                    else if (ch3 == 3) {
+                        O.peekL();
+                        cout << "";
+                    }
+                    else if (ch3 == 4) {
+                        cout << "";
+                        O.displayL();
+                        cout << "";
+                    }
+                }
+                else if (ch == 4) { break; }
+
+
+                else
+                    cout << "invalid choose *- press 1 or 2 ONLY";
+            }
+
+
+        }
+        //Q
+        else if (choose == 5) {
+            int cho;
+            MyQueue Q;
+            while (true) {
+                cout << "1-bult in Q , 2- Q By Array 3-Q by Linked List \n: ";
+                cout << "enter your chhose:";
+                cin >> cho;
+                if (cho == 1) {
+                    while (true) {
+                        int l;
+                        cout << "1-INQUEUE 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD 5-exit";
+                        cin >> l;
+                        if (l == 1) {
+                            Q.inqueubn();
+                        }
+                        else if (l == 2) {
+                            Q.dequeuebn();
+                        }
+                        else if (l == 3) {
+                            Q.print_Qelementbn();
+                        }
+                        else if (l == 4) {
+                            Q.showfrontbn();
+                        }
+                        else if (l == 5)
+                            break;
+                        else cout << "invalid choose:(";
+                    }
+                }
+                 else if (cho == 2) {
+                    int z = 0;
+                    MMQ* queue = nullptr;
+
+                    while (true) {
+                        cout << "1- INQUEUE\n2- DEQUEUE\n3- SHOW ALL ELEMENTS\n4- SHOW HEAD\n";
+                        cout << "enter your chhose:";
+                        int l;
+                        cin >> l;
+
+                        if (l == 1) {
+                           
+                                cout << "Enter the size of the array: ";
+                                cin >> z;
+                                queue = new MMQ(z);
+                          
+                            for (int i=0 ; i<z;i++) {
+                            int val;
+                            cout << "Enter value to enqueue: ";
+                            cin >> val;
+                            queue->inQ(val);
+                            }
+                        }
+                        else if (l == 2) {
+                            if (queue) {
+                                queue->dq();
+                            }
+                            else {
+                                cout << "Queue not initialized!\n";
+                            }
+                        }
+                        else if (l == 3) {
+                            if (queue) {
+                                queue->print();
+                            }
+                            else {
+                                cout << "Queue not initialized!\n";
+                            }
+                        }
+                        else if (l == 4) {
+                            if (queue) {
+                                queue->front();
+                            }
+                            else {
+                                cout << "Queue not initialized!\n";
+                            }
+                        }
+                        else if (l == 5) {
+                            break;
+                        }
+                        else {
+                            cout << "Invalid option! Try again.\n";
+                        }
+                    }
+
+                    delete queue;
+                }
+                 else if (cho == 3) {
+                    while (1){
+                    int l;
+                    cout << "1-INQUEUE(press -2004 to teminate this process) 2- DEQUEU 3-SHOW ALL ELEMENTS 4-SHOW HEAD\n";
+                    cout << "enter your chhose:";
+                    cin >> l;
+                    if (l == 1) {
+                        int  s;
+                        while (1) {
+                            cin >> s;
+                            if (s == -2004) break;
+                            S.spushL(s);
+                        }
+                        
+                    }
+                    else if (l == 2) {
+                        S.spopL();
+                    }
+                    else if (l == 3) {
+                        S.sdisplayL();
+                    }
+                    else if (l == 4) {
+                       S.speekL();
+                    }  else if (l == 5) {
+                        break;
+                    }
+
+                    else cout << "invalid choose:(";
+                    }
+                
+                }
+                 else if (cho == 4) { break; }
+                else cout << "invalid choose";
+
+            }
+        }
+
+        else
+            cout << "invalid choose:( ";
+    
+    }
